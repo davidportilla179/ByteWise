@@ -1,5 +1,6 @@
 class Course {
-  constructor(title, description, temary, teacher){
+  constructor(id, title, description, temary, teacher){
+    this.id = id;
     this.title = title; // titulo del curso
     this.description = description //descripcion del curso
     this.temary = temary; //temario del curso

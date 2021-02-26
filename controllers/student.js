@@ -7,7 +7,7 @@ function createStudent(req, res) {
 
 function getStudents(req, res) {
   var student1 = new Student(1, 'studentdemo1@example.com', '123123', 'Pablo')
-  var student2 = new Student(2, 'studentdemo1@example.com', '123123', 'Lucia')
+  var student2 = new Student(2, 'studentdemo2@example.com', '123123', 'Lucia')
   res.send([student1, student2])
 }
 

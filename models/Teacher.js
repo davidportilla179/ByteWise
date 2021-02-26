@@ -1,5 +1,6 @@
 class Teacher {
-  constructor(email, password, username, firstName, lastName, country, age, enrolledCourses){
+  constructor(id, email, password, username, firstName, lastName, country, age, uploadedCourses){
+    this.id = id; // email del usuario
     this.email = email; // email del usuario
     this.password = password //contraseña del usuario
     this.username = username; //apodo del usuario

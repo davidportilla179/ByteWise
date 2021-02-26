@@ -13,6 +13,9 @@ app.use(bodyParser.json());
 
 //routers
 app.use('/v1', require('./routes'));
+app.get('/', (req, res)=>{
+  res.send('Bienvenidos a Byte Wise');
+});
 
 // Manejando los errores 404
 app.use(function(req, res, next) {
