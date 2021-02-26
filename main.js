@@ -66,7 +66,7 @@ class Student {
   }
 
   class Course {
-    constructor(email, password, username, firstName, lastName, country, age, enrolledCourses){
+    constructor(title, description, temary, teacher){
       this.title = title; // titulo del curso
       this.description = description //descripcion del curso
       this.temary = temary; //temario del curso
