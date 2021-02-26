@@ -12,12 +12,15 @@ class Student {
     register(){
       // Crea una cuenta
     }
+    
     login(){
       // Iniciar sesión
     }
+    
     enroll(){
       // Inscribirse a un curso
     }
+
     reviewCourse() {
       // Dejar un comentario sobre el curso
     }
@@ -28,6 +31,10 @@ class Student {
 
     saveCourse() {
       // Guardar cursos para registrarse más tarde
+    }
+
+    askTeacher() {
+      // Enviar dudas/preguntas al profesor del curso al que se ha inscrito
     }
   }
   
@@ -42,6 +49,7 @@ class Student {
       this.age = age; // edad del usuario
       this.uploadedCourses = uploadedCourses; // cursos subidos del usuario
     }
+    
     register(){
       // Crea una cuenta
     }
@@ -53,9 +61,11 @@ class Student {
     login(){
       // Iniciar sesión
     }
+    
     uploadCourse(){
-      // Crear un curso
+      // Crear y subir un curso
     }
+    
     editCourse(){
       // Editar contenidos del curso
     }
@@ -66,10 +76,15 @@ class Student {
   }
 
   class Course {
-    constructor(title, description, temary, teacher){
+    constructor(title, description, syllabus, teacher, rating){
       this.title = title; // titulo del curso
       this.description = description //descripcion del curso
-      this.temary = temary; //temario del curso
+      this.syllabus = syllabus; //temario del curso
       this.teacher = teacher; // profesor del curso
+      this.rating = rating; // Promedio de las calificaciones del usuario
+    }
+
+    checkRegisteredLimit() {
+      // Revisa que la cantidad de estudiantes registrados esté dentro del límite
     }
   }
