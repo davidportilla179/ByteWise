@@ -15,7 +15,7 @@ class Student {
     login(){
       // Iniciar sesión
     }
-    enrollCourse(){
+    enroll(){
       // Inscribirse a un curso
     }
     reviewCourse() {
@@ -32,7 +32,7 @@ class Student {
   }
   
   class Teacher {
-    constructor(email, password, username, firstName, lastName, country, age, enrolledCourses){
+    constructor(email, password, username, firstName, lastName, country, age, uploadedCourses){
       this.email = email; // email del usuario
       this.password = password //contraseña del usuario
       this.username = username; //apodo del usuario
@@ -59,6 +59,7 @@ class Student {
     editCourse(){
       // Editar contenidos del curso
     }
+    
     deleteCourse(){
       // Borrar curso
     }
