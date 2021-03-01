@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //routers
-app.use('/v1', require('./routes'));
+app.use('/v1', require('./routes/index'));
 app.get('/', (req, res)=>{
   res.send('Bienvenidos a Byte Wise');
 });
