@@ -1,0 +1,17 @@
+CREATE DATABASE ByteWise
+
+db.createCollection('students')
+db.createCollection('teachers')
+db.createCollection('courses')
+
+db.students.insertMany([{
+
+}])
+
+db.teachers.insertMany([{
+
+}])
+
+db.courses.insertMany([{
+
+}])
