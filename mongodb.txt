@@ -1,4 +1,4 @@
-CREATE DATABASE ByteWise
+mongodb+srv://db_bedu:<password>@cluster0.v02gx.mongodb.net/ByteWise
 
 db.createCollection('students')
 db.createCollection('teachers')
