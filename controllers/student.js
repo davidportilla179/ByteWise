@@ -1,30 +1,86 @@
-const Student = require('../models/Student')
+const mongoose = require("mongoose")
+const Student = mongoose.model("Student")
+const passport = require('passport');
 
-function createStudent(req, res) {
-  var student = new Student(req.body)
-  res.status(201).send(student)
+function createStudent(req, res, next) {
+  const body = req.body,
+    password = body.password
+
+  delete body.password
+  const student = new Student(body)
+  student.createPassword(password)
+  student.save().then(user => {
+    return res.status(201).json(user.toAuthJSON())
+  }).catch(next)
 }
 
-function getStudents(req, res) {
-  var student1 = new Student(1, 'studentdemo1@example.com', '123123', 'Pablo')
-  var student2 = new Student(2, 'studentdemo2@example.com', '123123', 'Lucia')
-  res.send([student1, student2])
+function getStudents(req, res, next) {
+  Student.find().then(users=>{
+    res.send(users)
+  }).catch(next)
 }
 
-function editStudent(req, res) {
-  var student1 = new Student(req.params.id, 'studentdemo1@example.com', '147147', 'Pedro')
-  var modificaciones = req.body
-  student1 = { ...student1, ...modificaciones }
-  res.send(student1)
+// function getStudents(req, res, next) {                              //Obteniendo usuario desde MongoDB.
+//   Student.findById(req.student.id, (err, user) => {
+//     if (!user || err) {
+//       return res.sendStatus(401)
+//     }
+//     return res.json(user.publicData());
+//   }).catch(next);
+// }
+
+function editStudent(req, res, next) {
+  console.log(req.student)
+  Student.findById(req.student.id).then(user => {
+    if (!user) { return res.sendStatus(401); }
+    let newInfo = req.body
+    if (typeof newInfo.username !== 'undefined')
+      user.username = newInfo.username
+    if (typeof newInfo.firstName !== 'undefined')
+      user.firstName = newInfo.firstName
+    if (typeof newInfo.lastName !== 'undefined')
+      user.lastName = newInfo.lastName
+    if (typeof newInfo.country !== 'undefined')
+      user.country = newInfo.country
+    if (typeof newInfo.age !== 'undefined')
+      user.age = newInfo.age
+    user.save().then(updatedUser => {
+      res.status(201).json(updatedUser.publicData())
+    }).catch(next)
+  }).catch(next)
 }
 
 function deleteStudent(req, res) {
-  res.status(200).send(`Estudiante ${req.params.id} eliminado`);
+  Usuario.findOneAndDelete({ _id: req.student.id }).then(r => {
+    res.status(200).send(`Estudiante ${req.params.id} eliminado: ${r}`);
+  })
+}
+
+function logIn(req, res, next) {
+  if (!req.body.email) {
+    return res.status(422).json({ errors: { email: "no puede estar vacío" } });
+  }
+
+  if (!req.body.password) {
+    return res.status(422).json({ errors: { password: "no puede estar vacío" } });
+  }
+
+  passport.authenticate('local', { session: false }, function (err, user, info) {
+    if (err) { return next(err); }
+
+    if (user) {
+      user.token = user.generateJWT();
+      return res.json({ user: user.toAuthJSON() });
+    } else {
+      return res.status(422).json(info);
+    }
+  })(req, res, next);
 }
 
 module.exports = {
   createStudent,
   getStudents,
   editStudent,
-  deleteStudent
+  deleteStudent,
+  logIn
 }
