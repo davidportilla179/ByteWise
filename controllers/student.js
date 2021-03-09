@@ -20,7 +20,7 @@ function getStudents(req, res, next) {
   }).catch(next)
 }
 
-// function getStudents(req, res, next) {                              //Obteniendo usuario desde MongoDB.
+// function getStudents(req, res, next) {
 //   Student.findById(req.student.id, (err, user) => {
 //     if (!user || err) {
 //       return res.sendStatus(401)
