@@ -14,20 +14,20 @@ function createStudent(req, res, next) {
   }).catch(next)
 }
 
-function getStudents(req, res, next) {
-  Student.find().then(users=>{
-    res.send(users)
-  }).catch(next)
-}
-
 // function getStudents(req, res, next) {
-//   Student.findById(req.student.id, (err, user) => {
-//     if (!user || err) {
-//       return res.sendStatus(401)
-//     }
-//     return res.json(user.publicData());
-//   }).catch(next);
+//   Student.find().then(users=>{
+//     res.send(users)
+//   }).catch(next)
 // }
+
+function getStudents(req, res, next) {
+  Student.findById(req.student.id, (err, user) => {
+    if (!user || err) {
+      return res.sendStatus(401)
+    }
+    return res.json(user.publicData());
+  }).catch(next);
+}
 
 function editStudent(req, res, next) {
   console.log(req.student)

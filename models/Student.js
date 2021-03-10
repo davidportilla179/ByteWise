@@ -26,7 +26,7 @@ const StudentSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
   country: String,
   age: Number,
-  enrolledCourses: Array,
+  enrolledCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Course'}],
   hash: String,
   salt: String
 }, { timestamps: true });
