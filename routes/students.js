@@ -6,7 +6,7 @@ const {
   deleteStudent,
   logIn
 } = require('../controllers/student');
-const auth = require('./auth');
+const { auth } = require('./auth');
 
 router.get('/', auth.require, getStudents);
 router.get('/:id', auth.require, getStudents);

@@ -6,13 +6,17 @@ cors = require('cors');
 /*********************** Mongoose Configuration *******************************/
 const mongoose = require("mongoose");
 
+var isProduction = process.env.NODE_ENV === 'production';
+
 mongoose.connect(
-    "mongodb+srv://db_bedu:bBaqykee00Eh5T6P@cluster0.v02gx.mongodb.net/ByteWise?retryWrites=true&w=majority"
+  process.env.MONGODB_URI,
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
 mongoose.set("debug", true);
 
 require("./models/Student");
+require("./models/Teacher");
 require('./config/passport');
 
 /*********************** Mongoose Configuration *******************************/

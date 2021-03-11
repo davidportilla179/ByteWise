@@ -3,12 +3,17 @@ const {
   createTeacher,
   getTeachers,
   editTeacher,
-  deleteTeacher
+  deleteTeacher,
+  logIn
 } = require('../controllers/teacher');
 
-router.get('/', getTeachers)
-router.post('/', createTeacher)
-router.put('/:id', editTeacher)
-router.delete('/:id', deleteTeacher)
+const { authTeacher } = require('./auth');
+
+router.get('/', authTeacher.require, getTeachers);
+router.get('/:id', authTeacher.require, getTeachers);
+router.post('/', createTeacher);
+router.post('/login', logIn);
+router.put('/:id', authTeacher.require, editTeacher)
+router.delete('/:id', authTeacher.require, deleteTeacher)
 
 module.exports = router;

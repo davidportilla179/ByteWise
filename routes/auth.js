@@ -27,4 +27,23 @@ const auth = {
   })
 };
 
-module.exports = auth;
+const authTeacher = {
+  require: jwt({
+    secret: secret,
+    algorithms: ['HS256'],
+    userProperty: 'teacher',
+    getToken: getTokenFromHeader
+  }),
+  optional: jwt({
+    secret: secret,
+    algorithms: ['HS256'],
+    userProperty: 'teacher',
+    credentialsRequired: false,
+    getToken: getTokenFromHeader
+  })
+};
+
+module.exports = {
+  auth,
+  authTeacher
+};
