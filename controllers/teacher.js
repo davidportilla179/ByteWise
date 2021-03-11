@@ -65,7 +65,7 @@ function logIn(req, res, next) {
     return res.status(422).json({ errors: { password: "no puede estar vacío" } });
   }
 
-  passport.authenticate('local', { session: false }, function (err, user, info) {
+  passport.authenticate('local-teacher', { session: false }, function (err, user, info) {
     if (err) { return next(err); }
 
     if (user) {
