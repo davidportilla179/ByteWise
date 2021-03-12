@@ -69,6 +69,12 @@ function deleteCourse(req, res, next) {
   Course.findOneAndDelete({ _id: req.params.id }).then(r => {
     res.status(200).send(`Curso ${req.params.id} eliminado: ${r}`);
   }).catch(next);
+  Teacher.findById(req.teacher.id).then(user => {
+    //delete objectid in uploadedCourses teachers
+    user.uploadedCourses.pop();
+    user.save().catch(next);
+
+  }).catch(next);
 }
 
 module.exports = {
