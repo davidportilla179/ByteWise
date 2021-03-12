@@ -164,20 +164,17 @@ Ya podrás hacer las mismas peticiones que hacias con tu aplicación de peticion
 * [MongoDB](https://www.mongodb.com/es) - Base de datos NoSQL
 * [Visual Studio Code 2019](https://visualstudio.microsoft.com/es/) - Editor de Texto
 
+## Autores ✒️
 
+* **David Cruz Portilla** - [davidportilla179](https://github.com/davidportilla179)
+* **Miguel Angel Reyes Cruz** - [frusgasmic](https://github.com/frusgasmic)
+* **Ana Maria Ruiz Fernandez** - [amrf7](https://github.com/amrf7)
 ## Versionado 📌
 
 * [Git Bash](https://gitforwindows.org/) - Controlador de versiones
 * [Repositorio](https://github.com/davidportilla179/ByteWise) - Repositorio del Proyecto
-
-
-
-
-
 ## Expresiones de Gratitud 🎁
 
 * Agradecemos al equipo de BEDU en general por su gran trabajo y apoyo en este proyecto. 📢🤓.
-
-
 ---
 ⌨️ con ❤️ por el EQUIPO 21
