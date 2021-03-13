@@ -17,6 +17,7 @@ mongoose.set("debug", true);
 
 require("./models/Student");
 require("./models/Teacher");
+require("./models/Course");
 require('./config/passport');
 
 /*********************** Mongoose Configuration *******************************/
