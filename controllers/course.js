@@ -1,30 +1,50 @@
-const Course = require('../models/Course');
+const mongoose = require("mongoose")
+const Course = mongoose.model("Course")
+const passport = require('passport');
 
-function createCourse(req, res) {
-  var course = new Course(req.body)
-  res.status(201).send(course)
+function createCourse(req, res, next) {
+    var new_course = new Course(req.body);
+    new_course.save().then(user => {
+        res.status(201).send(new_course)
+    }).catch(next)
 }
 
-function getCourses(req, res) {
-  var course1 = new Course(1, 'Curso de HTML', 'HTML desde cero', ['Intro','Que es HTML'])
-  var course2 = new Course(2, 'Curso de CSS', 'CSS desde cero', ['Intro','Que es CSS'])
-  res.send([course1, course2])
+function getCourses(req, res, next) {
+    Course.findById(req.course.id, (err, user) => {
+        if (!user || err) {
+            return res.sendStatus(401)
+        }
+        return res.json(user.publicData());
+    }).catch(next);
 }
 
-function editCourse(req, res) {
-  var course1 = new Course(req.params.id, 'Curso de HTML', 'HTML para principiantes', ['Intro','Que es HTML'])
-  var modificaciones = req.body
-  course1 = { ...course1, ...modificaciones }
-  res.send(course1)
+function editCourse(req, res, next) {
+    Course.findById(req.course.id).then(user => {
+        if (!user) { return res.sendStatus(401); }
+        let newInfo = req.body
+        if (typeof newInfo.title !== 'undefined')
+            user.title = newInfo.title
+        if (typeof newInfo.description !== 'undefined')
+            user.description = newInfo.description
+        if (typeof newInfo.temary !== 'undefined')
+            user.temary = newInfo.temary
+        if (typeof newInfo.teacher !== 'undefined')
+            user.teacher = newInfo.teacher
+        user.save().then(updatedUser => {
+            res.status(201).json(updatedUser.publicData())
+        }).catch(next)
+    }).catch(next)
 }
 
 function deleteCourse(req, res) {
-  res.status(200).send(`Curso ${req.params.id} eliminado`);
+    Course.findOneAndDelete({ _id: req.course.id }).then(r => {
+        res.status(200).send(`Curso ${req.params.id} eliminado: ${r}`);
+    })
 }
 
 module.exports = {
-  createCourse,
-  getCourses,
-  editCourse,
-  deleteCourse
+    createCourse,
+    getCourses,
+    editCourse,
+    deleteCourse
 }
