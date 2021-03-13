@@ -129,8 +129,27 @@ http://localhost:<puerto-que-definiste-en-env.sh>/v1/students
 ```
 Con el token podrás probar los demás servicios que puede hacer un usuario de tipo **STUDENT** y **TEACHER**.
 
-Consulta el [Swagger](https://) del proyecto para observar los servicios disponibles para los estudiantes.
+Consulta el [Swagger](https://) del proyecto para observar los servicios CRUD para los estudiantes y maestros.
 
+### CRUD de la entidad **COURSE**
+No es necesario ingresar con una cuenta de **profesor** o **estudiante** para ver todos los cursos, haciendo la siguiente petición podrás ver el contenido:
+```
+http://localhost:<puerto-que-definiste-en-env.sh>/v1/courses
+```
+Y para obtener la información de un solo curso:
+```
+http://localhost:<puerto-que-definiste-en-env.sh>/v1/courses/<id-del-curso>
+```
+Los métodos **POST, PUT y DELETE** solo pueden ser ejecutados si estás autenticado con un usuario de tipo **TEACHER**.
+
+Al momento de **CREAR o ELIMINAR** el ID del curso se almacenará o eliminará en el campo "uploadedCourses" de la entidad **TEACHER**.
+
+Para que un estudiante se inscriba a un curso, es necesario que envié la siguiente petición **PUT**:
+```
+http://localhost:<puerto-que-definiste-en-env.sh>/v1/students/enrolled/<id-del-curso>
+```
+Y se almacenará el ID del curso en el campo "enrolledCourses" de la entidad **STUDENT**
+* _Recuerda estar autenticado como **STUDENT**_
 ## Despliegue 📦
 
 El deploy de la aplicación está en Heroku, en caso de hacer deploy de tu copia deberás seguir estos pasos:
