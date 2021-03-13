@@ -2,6 +2,11 @@
 
 El proyecto consta de una aplicación con objetivos educativos. Deberá permitirle a profesores la publicación y edición de cursos de su autoría, además de permitirle a estudiantes registrarse en la plataforma y poder ver e inscribirse en cualquiera de los cursos disponibles.
 
+## ByteWise en **HEROKU**
+Entra en el siguiente link para interactuar con la aplicación (API) de ByteWise
+
+https://bytewise-backend-api.herokuapp.com/
+
 ## Usuarios de ByteWise 👱🏻‍♀️👱🏻‍♂️
 En ByteWise existen dos tipos de usuarios:
 1. Estudiantes
@@ -136,10 +141,22 @@ No es necesario ingresar con una cuenta de **profesor** o **estudiante** para ve
 ```
 http://localhost:<puerto-que-definiste-en-env.sh>/v1/courses
 ```
-Y para obtener la información de un solo curso:
+* Para obtener la información de un solo curso:
 ```
 http://localhost:<puerto-que-definiste-en-env.sh>/v1/courses/<id-del-curso>
+
+//EJEMPLO:
+http://localhost:3000/v1/courses/604bee462c627e076cd5f04e
 ```
+* Para filtrar los cursos por un titulo, descripción o profesor es necesario añadir una **query** en la url:
+```
+http://localhost:<puerto-que-definiste-en-env.sh>/v1/courses?<campo>=<info>
+
+//EJEMPLO:
+http://localhost:3000/v1/courses?description=curso-2
+```
+_La información que contenga espacios, replaza los espacios por guiones medios- EJEMPLO: title: curso de js, query: curso-de-js._
+
 Los métodos **POST, PUT y DELETE** solo pueden ser ejecutados si estás autenticado con un usuario de tipo **TEACHER**.
 
 Al momento de **CREAR o ELIMINAR** el ID del curso se almacenará o eliminará en el campo "uploadedCourses" de la entidad **TEACHER**.
@@ -147,9 +164,13 @@ Al momento de **CREAR o ELIMINAR** el ID del curso se almacenará o eliminará e
 Para que un estudiante se inscriba a un curso, es necesario que envié la siguiente petición **PUT**:
 ```
 http://localhost:<puerto-que-definiste-en-env.sh>/v1/students/enrolled/<id-del-curso>
+
+//EJEMPLO:
+http://localhost:3000/v1/students/enrolled/6041bbe8876f6338e05c1048
 ```
 Y se almacenará el ID del curso en el campo "enrolledCourses" de la entidad **STUDENT**
 * _Recuerda estar autenticado como **STUDENT**_
+
 ## Despliegue 📦
 
 El deploy de la aplicación está en Heroku, en caso de hacer deploy de tu copia deberás seguir estos pasos:

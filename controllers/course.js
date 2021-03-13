@@ -1,3 +1,4 @@
+const { query } = require("express");
 const mongoose = require("mongoose");
 const Course = mongoose.model("Course");
 const Teacher = mongoose.model("Teacher");
@@ -23,12 +24,22 @@ function createCourse(req, res, next) {
 function getCourses(req, res, next) {
   if(req.params.id){
     Course.findById(req.params.id).then(courses => {
-	    res.send(courses);
+      res.send(courses);
 	  }).catch(next);
   } else {
-    Course.find().then(courses=>{
-      res.send(courses);
-    }).catch(next);
+    if(req.query){
+      objectKeys = Object.keys(req.query);
+      objectKeys.map(key => {
+        req.query[key] = req.query[key].replace(/_|-/g, " ");
+      });
+      Course.find(req.query).then(courses=>{
+        res.send(courses);
+      }).catch(next);
+    }else {
+      Course.find().then(courses=>{
+        res.send(courses);
+      }).catch(next);
+    }
   }
 }
 
