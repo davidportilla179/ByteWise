@@ -1,50 +1,70 @@
-const mongoose = require("mongoose")
-const Course = mongoose.model("Course")
-const passport = require('passport');
+const mongoose = require("mongoose");
+const Course = mongoose.model("Course");
+const Teacher = mongoose.model("Teacher");
 
 function createCourse(req, res, next) {
-    var new_course = new Course(req.body);
-    new_course.save().then(user => {
-        res.status(201).send(new_course)
-    }).catch(next)
+  console.log(req.teacher)
+  Teacher.findById(req.teacher.id).then(user => {
+    if (!user) { return res.sendStatus(401); }
+    //create new course
+    const body = req.body;
+    const course = new Course(body);
+    course.teacher = req.teacher.id;
+    //add course id in uploadedCourses teachers
+    user.uploadedCourses.push(course.id);
+    user.save().catch(next);
+
+    course.save().then(course => {
+      return res.status(201).send(course);
+    }).catch(next);
+  }).catch(next);
 }
 
 function getCourses(req, res, next) {
-    Course.findById(req.course.id, (err, user) => {
-        if (!user || err) {
-            return res.sendStatus(401)
-        }
-        return res.json(user.publicData());
+  if(req.params.id){
+    Course.findById(req.params.id).then(courses => {
+	    res.send(courses);
+	  }).catch(next);
+  } else {
+    Course.find().then(courses=>{
+      res.send(courses);
     }).catch(next);
+  }
 }
 
 function editCourse(req, res, next) {
-    Course.findById(req.course.id).then(user => {
-        if (!user) { return res.sendStatus(401); }
-        let newInfo = req.body
-        if (typeof newInfo.title !== 'undefined')
-            user.title = newInfo.title
-        if (typeof newInfo.description !== 'undefined')
-            user.description = newInfo.description
-        if (typeof newInfo.temary !== 'undefined')
-            user.temary = newInfo.temary
-        if (typeof newInfo.teacher !== 'undefined')
-            user.teacher = newInfo.teacher
-        user.save().then(updatedUser => {
-            res.status(201).json(updatedUser.publicData())
-        }).catch(next)
-    }).catch(next)
+  Course.findById(req.params.id).then(course => {
+    if (!course) { return res.sendStatus(401); }
+    let newInfo = req.body;
+    if (typeof newInfo.title !== 'undefined')
+      course.title = newInfo.title;
+    if (typeof newInfo.description !== 'undefined')
+      course.description = newInfo.description;
+    if (typeof newInfo.syllabus !== 'undefined')
+      course.syllabus = newInfo.syllabus;
+    if (typeof newInfo.rating !== 'undefined')
+      course.rating = newInfo.rating;
+    course.save().then(updatedCourse => {
+      res.status(201).json(updatedCourse.publicData());
+    }).catch(next);
+  }).catch(next);
 }
 
-function deleteCourse(req, res) {
-    Course.findOneAndDelete({ _id: req.course.id }).then(r => {
-        res.status(200).send(`Curso ${req.params.id} eliminado: ${r}`);
-    })
+function deleteCourse(req, res, next) {
+  Course.findOneAndDelete({ _id: req.params.id }).then(r => {
+    res.status(200).send(`Curso ${req.params.id} eliminado: ${r}`);
+  }).catch(next);
+  Teacher.findById(req.teacher.id).then(user => {
+    //delete objectid in uploadedCourses teachers
+    user.uploadedCourses.pop();
+    user.save().catch(next);
+
+  }).catch(next);
 }
 
 module.exports = {
-    createCourse,
-    getCourses,
-    editCourse,
-    deleteCourse
-}
+  createCourse,
+  getCourses,
+  editCourse,
+  deleteCourse,
+};

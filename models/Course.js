@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const uniqueValidator = require("mongoose-unique-validator");
 
-//const secret = require('../config').secret;
-
 const CourseSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
