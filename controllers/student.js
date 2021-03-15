@@ -43,7 +43,7 @@ function editStudent(req, res, next) {
   }).catch(next);
 }
 
-function deleteStudent(req, res) {
+function deleteStudent(req, res, next) {
   Student.findOneAndDelete({ _id: req.student.id }).then(r => {
     res.status(200).send(`Estudiante ${req.params.id} eliminado: ${r}`);
   }).catch(next);

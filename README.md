@@ -51,7 +51,11 @@ Mira **Deployment** para conocer como desplegar el proyecto.
 2. Tener una aplicación para hacer solicitudes HTTP como Insomnia o Postman
 ```
 ### Swagger 👽
-Consulta el [Swagger](https://) del proyecto para observar los servicios de la aplicación.
+Consulta los Swagger del proyecto para observar los servicios de la aplicación.
+
+* [Swagger de Teachers](https://app.swaggerhub.com/apis/davidportilla179/ByteWiseAPI-Teachers/0.1)
+* [Swagger de Students](https://app.swaggerhub.com/apis/davidportilla179/ByteWiseAPI-Students/0.1)
+* [Swagger de Courses](https://app.swaggerhub.com/apis/davidportilla179/ByteWiseAPI-Courses/0.1)
 
 ## Instalación 🔧
 
@@ -99,7 +103,8 @@ Mongoose: teachers.createIndex({ email: 1 }, { unique: true, background: true })
 Mongoose: students.createIndex({ username: 1 }, { unique: true, background: true })
 Mongoose: teachers.createIndex({ username: 1 }, { unique: true, background: true })
 ```
-
+### Poblar Base de datos 🧾
+En este [LINK](https://drive.google.com/drive/folders/1ekPzUcSur_0lZLr4vkBpO1_XMXP6MgNj?usp=sharing) puedes obtener los datos de las colecciones del proyecto en formatos .csv o .json.
 ## Ejecutando servicios ⚙️
 
 Para iniciar con las pruebas de todos los servicios será necesario crear un usuario de tipo **STUDENT** y de **TEACHER**.
