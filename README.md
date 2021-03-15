@@ -212,8 +212,8 @@ Ya podrás hacer las mismas peticiones que hacias con tu aplicación de peticion
 ## Autores ✒️
 
 * **David Cruz Portilla** - [davidportilla179](https://github.com/davidportilla179)
-* **Miguel Angel Reyes Cruz** - [frusgasmic](https://github.com/frusgasmic)
 * **Ana Maria Ruiz Fernandez** - [amrf7](https://github.com/amrf7)
+* **Miguel Angel Reyes Cruz** - [frusgasmic](https://github.com/frusgasmic)
 ## Versionado 📌
 
 * [Git Bash](https://gitforwindows.org/) - Controlador de versiones
