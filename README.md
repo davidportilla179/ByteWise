@@ -139,7 +139,7 @@ http://localhost:<puerto-que-definiste-en-env.sh>/v1/students
 ```
 Con el token podrás probar los demás servicios que puede hacer un usuario de tipo **STUDENT** y **TEACHER**.
 
-Consulta el [Swagger](https://) del proyecto para observar los servicios CRUD para los estudiantes y maestros.
+Consulta el Swagger del proyecto para observar los servicios CRUD para los estudiantes y maestros.
 
 ### CRUD de la entidad **COURSE**
 No es necesario ingresar con una cuenta de **profesor** o **estudiante** para ver todos los cursos, haciendo la siguiente petición podrás ver el contenido:
